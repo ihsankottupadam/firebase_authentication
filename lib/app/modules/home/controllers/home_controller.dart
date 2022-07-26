@@ -1,23 +1,13 @@
+import 'package:firebase_authentication/app/data/models/user_model.dart';
+import 'package:firebase_authentication/app/modules/sign_in/controllers/auth_controller.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
-
-  final count = 0.obs;
+  final AuthContoller authContoller = Get.find();
+  late UserModel currentUser;
   @override
   void onInit() {
     super.onInit();
+    currentUser = authContoller.loggedInUser;
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

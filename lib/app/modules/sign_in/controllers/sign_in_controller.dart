@@ -6,17 +6,19 @@ class SignInController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
   }
 
-  validate() {
-    if (!formKey.currentState!.validate()) {
+  validate() async {
+    if (!formKey.currentState!.validate() || isLoading.value) {
       return;
     }
-    Get.find<AuthContoller>()
+    isLoading.value = true;
+    isLoading.value = await Get.find<AuthContoller>()
         .signIn(emailController.text.trim(), passwordController.text.trim());
   }
 }

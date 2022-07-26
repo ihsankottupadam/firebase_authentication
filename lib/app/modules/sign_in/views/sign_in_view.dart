@@ -63,17 +63,29 @@ class SignInView extends GetView<SignInController> {
                       ),
                       verticalSpace,
                       SizedBox(
-                          width: double.infinity,
-                          height: 40,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  elevation: 4,
-                                  primary: const Color(0xfffb6a69),
-                                  shadowColor: const Color(0x77fb6a69)),
-                              onPressed: () {
-                                controller.validate();
-                              },
-                              child: const Text('Sign in'))),
+                        width: double.infinity,
+                        height: 40,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              elevation: 4,
+                              primary: const Color(0xfffb6a69),
+                              shadowColor: const Color(0x77fb6a69)),
+                          onPressed: () {
+                            controller.validate();
+                          },
+                          child: Obx(
+                            () => controller.isLoading.value
+                                ? const SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : const Text('Sign in'),
+                          ),
+                        ),
+                      ),
                       verticalSpace,
                       const Text(
                         'Or',
