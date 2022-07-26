@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "834329058601",
+    "project_id": "testauth-e934e",
+    "storage_bucket": "testauth-e934e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834329058601:android:2ed4c2c2771b4566d92b38",
+        "android_client_info": {
+          "package_name": "com.izn.firebase_auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834329058601-trruva5q38oresb8irrlgioedt5uepof.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvNCuTut7a7-5hd2Hie99yEwXO7roNAq4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834329058601-trruva5q38oresb8irrlgioedt5uepof.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
