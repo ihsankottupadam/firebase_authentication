@@ -9,12 +9,14 @@ class InputField extends StatelessWidget {
     this.inputType = TextInputType.text,
     this.isPassword = false,
     this.validator,
+    this.onChanged,
   }) : super(key: key);
   final String hintText;
   final TextEditingController? controller;
   final TextInputType inputType;
   final bool isPassword;
   final FormFieldValidator<String>? validator;
+  final ValueChanged<String>? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class InputField extends StatelessWidget {
               const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
           fillColor: const Color(0x77ffffff)),
       validator: validator,
+      onChanged: onChanged,
     );
   }
 }

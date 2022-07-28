@@ -1,4 +1,5 @@
 import 'package:firebase_authentication/app/data/colors.dart';
+import 'package:firebase_authentication/app/modules/sign_in/controllers/auth_controller.dart';
 import 'package:firebase_authentication/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -98,7 +99,9 @@ class SignInView extends GetView<SignInController> {
                         width: double.infinity,
                         height: 40,
                         child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.find<AuthContoller>().signInWithGoogle();
+                            },
                             style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 primary: const Color(0x77FFFFFF),
@@ -110,9 +113,10 @@ class SignInView extends GetView<SignInController> {
                               children: [
                                 Image.asset('assets/images/google-icon.png'),
                                 horizondalSpace,
-                                const Text('Sign in with Google',
-                                    style:
-                                        TextStyle(color: MyColors.lightBlack))
+                                const Text('Continue with Google',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: MyColors.lightBlack))
                               ],
                             )),
                       ),

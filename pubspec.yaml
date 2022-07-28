@@ -13,6 +13,8 @@ dependencies:
   flutter: 
     sdk: flutter
   firebase_auth: ^3.5.1
+  google_sign_in: ^5.4.0
+  image_picker: ^0.8.5+3
 
 dev_dependencies: 
   flutter_lints: ^2.0.0

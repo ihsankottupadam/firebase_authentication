@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:firebase_authentication/app/data/models/user_model.dart';
 import 'package:firebase_authentication/app/modules/home/controllers/home_controller.dart';
+import 'package:firebase_authentication/app/modules/sign_in/controllers/auth_controller.dart';
+import 'package:firebase_authentication/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +14,9 @@ class ProfileButton extends GetWidget<HomeController> {
   Widget build(BuildContext context) {
     return PopupMenuButton(
         offset: Offset(0, AppBar().preferredSize.height - 10),
-        child: _buildAvatar(),
+        child: GetBuilder<AuthContoller>(builder: (aContoller) {
+          return _buildAvatar();
+        }),
         onSelected: (val) => _onPopSelect(val),
         itemBuilder: (context) {
           return [
@@ -40,7 +44,7 @@ class ProfileButton extends GetWidget<HomeController> {
   }
 
   PopupMenuItem _buldAccoutInfo() {
-    final UserModel user = controller.currentUser;
+    final UserModel user = controller.authContoller.loggedInUser;
     return PopupMenuItem(
         value: 'profile',
         child: Padding(
@@ -68,6 +72,7 @@ class ProfileButton extends GetWidget<HomeController> {
   _onPopSelect(selected) {
     switch (selected) {
       case 'Account':
+        Get.toNamed(Routes.PROFILE);
         break;
       case 'Log Out':
         controller.authContoller.signOut();
@@ -77,31 +82,38 @@ class ProfileButton extends GetWidget<HomeController> {
   }
 
   Widget _buildAvatar() {
-    final UserModel currUser = controller.currentUser;
+    final UserModel currUser = controller.authContoller.loggedInUser;
     String? imageString = currUser.imageString;
     final double preffWid = appbarHeiht - 20;
-    return imageString == null
-        ? Center(
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.teal, borderRadius: BorderRadius.circular(50)),
-              width: preffWid,
-              height: preffWid,
-              child: Center(
-                  child: Text(
-                currUser.firstName![0],
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: preffWid - 15,
-                    color: Colors.white),
-              )),
-            ),
-          )
-        : Image.memory(
+    if (imageString == null || imageString.isEmpty) {
+      return Center(
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.teal, borderRadius: BorderRadius.circular(50)),
+          width: preffWid,
+          height: preffWid,
+          child: Center(
+              child: Text(
+            currUser.firstName![0],
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: preffWid - 15,
+                color: Colors.white),
+          )),
+        ),
+      );
+    } else {
+      return Center(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(100),
+          child: Image.memory(
             base64Decode(currUser.imageString!),
             width: preffWid,
             height: preffWid,
-            fit: BoxFit.contain,
-          );
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    }
   }
 }
